@@ -1,15 +1,22 @@
-import { forwardRef } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import Accordion, { AccordionItem } from './Accordion';
-import usePlotStore from '../store';
+import { fetchDatasetsByType } from '../api';
 
 const Divider = () => {
     return <div className="my-4 md:my-6 lg:my-8 w-full border-b-2 border-neutral-600" />
 }
 
 const Sidebar = forwardRef(({ isOpen }, ref) => {
-    const diffusionDatasetIds = usePlotStore((s) => s.diffusionDatasetIds);
-    const comparisonDatasetIds = usePlotStore((s) => s.comparisonDatasetIds);
-    const datasets = usePlotStore((s) => s.datasets);
+    const [diffusionDatasets, setDiffusionDatasets] = useState([]);
+    const [comparisonDatasets, setComparisonDatasets] = useState([]);
+
+    useEffect(() => {
+        const fetchDatasets = async () => {
+            setDiffusionDatasets(await fetchDatasetsByType("Diffusion"));
+            setComparisonDatasets(await fetchDatasetsByType("Comparison"))
+        }
+        fetchDatasets();
+    }, []);
 
     return (
         <div 
@@ -21,14 +28,12 @@ const Sidebar = forwardRef(({ isOpen }, ref) => {
             <p className="text-white font-semibold text-2xl md:text-3xl">Experiments</p>
             <Divider />
             <div className="flex flex-col gap-2">
-                <Accordion header="Diffusion Plots" items={diffusionDatasetIds.map(id => {
-                    let metadata = datasets[id];
-                    return <AccordionItem title={metadata.title} link={`/dataset/${id}`} key={id} />
-                })} />
-                <Accordion header="GAN vs Diffusion" items={comparisonDatasetIds.map(id => {
-                    let metadata = datasets[id];
-                    return <AccordionItem title={metadata.title} link={`/dataset/${id}`} key={id} />
-                })} />
+                <Accordion header="Diffusion Plots" items={diffusionDatasets.map(ds => (
+                    <AccordionItem title={ds.title} link={`/dataset/${ds.id}`} key={ds.id} />
+                ))} />
+                <Accordion header="GAN vs Diffusion" items={comparisonDatasets.map(ds => (
+                    <AccordionItem title={ds.title} link={`/dataset/${ds.id}`} key={ds.id} />
+                ))} />
             </div>
         </div>
     );

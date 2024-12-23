@@ -13,13 +13,13 @@ const ImageCard = ({ src, title, link }) => {
     >
         <div className="text-center text-semibold md:text-xl lg:text-2xl underline">{title}</div>
         <img ref={ref} onLoad={onLoad} src={src} className="w-11/12"/>
-        {!loaded && <ColorRing
-            visible={true}
+        <ColorRing
+            visible={!loaded}
             ariaLabel="color-ring-loading"
             wrapperStyle={{}}
             wrapperClass="color-ring-wrapper"
             colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
-        />}
+        />
     </div>
 }
 
