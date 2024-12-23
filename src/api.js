@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 
-const PUBLIC_ANON_KEY = import.meta.env.VITE_PUBLIC_ANON_KEY;
+const PUBLIC_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1vYXFtZGVkdmdyZ2ZrbWl2dGt2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ5MTgwODIsImV4cCI6MjA1MDQ5NDA4Mn0.aesB82Ak7QzvmCsUwrXO5U45BDxTvWPXdGRPVqW7Pj4";
 const supabase = createClient('https://moaqmdedvgrgfkmivtkv.supabase.co', PUBLIC_ANON_KEY);
 
 export class DatasetMetadata {
