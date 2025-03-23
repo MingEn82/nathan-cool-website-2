@@ -1,0 +1,61 @@
+title,desc,path
+Generated Images,Insert Description Here,plots/dataset_1/gen-imgs_4.png
+Maximum blobs counted,Insert Description Here,plots/dataset_1/max-peak.png
+Minimum blobs counted,Insert Description Here,plots/dataset_1/min-peak.png
+Histogram of blob count,Insert Description Here,plots/dataset_1/number-blobs-histogram.png
+Histogram of stacked images,Insert Description Here,plots/dataset_1/stack-histogram-img.png
+Stacked images,Insert Description Here,plots/dataset_1/stack.png
+Two point correlation,Insert Description Here,plots/dataset_1/two_point.png
+Generated Images,Insert Description Here,plots/dataset_2/gen-imgs_1.png
+Maximum blobs counted,Insert Description Here,plots/dataset_2/max-peak.png
+Minimum blobs counted,Insert Description Here,plots/dataset_2/min-peak.png
+CDF of blob count,Insert Description Here,plots/dataset_2/number-blobs-cdf.png
+Histogram of blob count,Insert Description Here,plots/dataset_2/number-blobs-histogram.png
+Histogram of stacked images,Insert Description Here,plots/dataset_2/stack-histogram-img.png
+Stacked images,Insert Description Here,plots/dataset_2/stack.png
+Two point correlation,Insert Description Here,plots/dataset_2/two_point.png
+Generated Images,Insert Description Here,plots/dataset_3/gen-imgs_0.png
+Maximum flux,Insert Description Here,plots/dataset_3/max-flux.png
+Minimum flux,Insert Description Here,plots/dataset_3/min-flux.png
+Power Spectrum,Insert Description Here,plots/dataset_3/power_spec.png
+Histogram of stacked images,Insert Description Here,plots/dataset_3/stack-histogram-img.png
+Stacked images,Insert Description Here,plots/dataset_3/stack.png
+Total flux distribution,Insert Description Here,plots/dataset_3/total_flux_distr.png
+Generated Images,Insert Description Here,plots/dataset_4/gen-imgs_4.png
+Maximum flux,Insert Description Here,plots/dataset_4/max-flux.png
+Minimum flux,Insert Description Here,plots/dataset_4/min-flux.png
+Power Spectrum,Insert Description Here,plots/dataset_4/power_spec.png
+Histogram of stacked images,Insert Description Here,plots/dataset_4/stack-histogram-img.png
+Stacked images,Insert Description Here,plots/dataset_4/stack.png
+Total flux distribution,Insert Description Here,plots/dataset_4/total_flux_distr.png
+CDF of blobs amplitude,Insert Description Here,plots/dataset_5/amplitude-blobs-cdf.png
+Histogram of blobs amplitude,Insert Description Here,plots/dataset_5/amplitude-blobs-histogram.png
+Generated Images,Insert Description Here,plots/dataset_5/gen-imgs_1.png
+Maximum blobs counted,Insert Description Here,plots/dataset_5/max-peak.png
+Minimum blobs counted,Insert Description Here,plots/dataset_5/min-peak.png
+CDF of blob count,Insert Description Here,plots/dataset_5/number-blobs-cdf.png
+Histogram of blob count,Insert Description Here,plots/dataset_5/number-blobs-histogram.png
+Histogram of stacked images,Insert Description Here,plots/dataset_5/stack-histogram-img.png
+Stacked images,Insert Description Here,plots/dataset_5/stack.png
+Two point correlation,Insert Description Here,plots/dataset_5/two_point.png
+Generated Images,Insert Description Here,plots/dataset_6/gen-imgs_3.png
+Maximum flux,Insert Description Here,plots/dataset_6/max-flux.png
+Minimum flux,Insert Description Here,plots/dataset_6/min-flux.png
+Power Spectrum,Insert Description Here,plots/dataset_6/power_spec.png
+Histogram of stacked images,Insert Description Here,plots/dataset_6/stack-histogram-img.png
+Stacked images,Insert Description Here,plots/dataset_6/stack.png
+Total flux distribution,Insert Description Here,plots/dataset_6/total_flux_distr.png
+Histogram of blob count,Insert Description Here,plots/gan_vs_diffusion/exactly_10/count-histogram.png
+Maximum blobs counted,Insert Description Here,plots/gan_vs_diffusion/exactly_10/max.png
+Minimum blobs counted,Insert Description Here,plots/gan_vs_diffusion/exactly_10/min.png
+Residuals,Insert Description Here,plots/gan_vs_diffusion/exactly_10/residual_0.png
+Samples,Insert Description Here,plots/gan_vs_diffusion/exactly_10/samples.png
+Histogram of stacked images,Insert Description Here,plots/gan_vs_diffusion/exactly_10/stack-pixel-histogram.png
+Stacked images,Insert Description Here,plots/gan_vs_diffusion/exactly_10/stack.png
+Histogram of blob count,Insert Description Here,plots/gan_vs_diffusion/poisson_10/count-histogram.png
+Maximum blobs counted,Insert Description Here,plots/gan_vs_diffusion/poisson_10/max.png
+Minimum blobs counted,Insert Description Here,plots/gan_vs_diffusion/poisson_10/min.png
+Residuals,Insert Description Here,plots/gan_vs_diffusion/poisson_10/residual_1.png
+Samples,Insert Description Here,plots/gan_vs_diffusion/poisson_10/samples.png
+Histogram of stacked images,Insert Description Here,plots/gan_vs_diffusion/poisson_10/stack-pixel-histogram.png
+Stacked images,Insert Description Here,plots/gan_vs_diffusion/poisson_10/stack.png
