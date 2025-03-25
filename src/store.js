@@ -1,11 +1,23 @@
 import { create } from "zustand";
 
 class DatasetMetadata {
-  constructor(id, title, desc, imageIds) {
+  constructor(id, title, desc, imageIds, resolution, 
+    distribution, blobCount, sampleCount, 
+    blobClustering, blobSize, 
+    blobAmplitude, blobAmplitudeDesc = null
+  ) {
     this.id = id;
     this.title = title;
     this.desc = desc;
     this.imageIds = imageIds;
+    this.resolution = resolution;
+    this.distribution = distribution;
+    this.blobCount = blobCount,
+    this.sampleCount = sampleCount;
+    this.blobClustering = blobClustering;
+    this.blobSize = blobSize;
+    this.blobAmplitude = blobAmplitude;
+    this.blobAmplitudeDesc = blobAmplitudeDesc;
   }
 }
 
@@ -32,7 +44,7 @@ const usePlotStore = create((set, get) => ({
       "d1-stack",
       "d1-total-flux-cdf",
       "d1-total-flux-histogram",
-    ]),
+    ], 32, "delta", 10, 50000, "None", 5, "0.1"),
     d2: new DatasetMetadata("d2", "Dataset 2", "Replace with description of page", [
       "d2-2-pt-corr",
       "d2-gen-imgs",
@@ -44,7 +56,7 @@ const usePlotStore = create((set, get) => ({
       "d2-stack",
       "d2-total-flux-cdf",
       "d2-total-flux-histogram",
-    ]),
+    ], 32, "poisson", 10, 50000, "None", 5, "0.1"),
     d3: new DatasetMetadata("d3", "Dataset 3", "Replace with description of page", [
       "d3-gen-imgs",
       "d3-max-flux",
@@ -54,7 +66,7 @@ const usePlotStore = create((set, get) => ({
       "d3-stack",
       "d3-total-flux-cdf",
       "d3-total-flux-histogram",
-    ]),
+    ], 128, "poisson", 1000, 100000, "None", 3, "1"),
     d4: new DatasetMetadata("d4", "Dataset 4", "Replace with description of page", [
       "d4-gen-imgs",
       "d4-max-flux",
@@ -64,7 +76,7 @@ const usePlotStore = create((set, get) => ({
       "d4-stack",
       "d4-total-flux-cdf",
       "d4-total-flux-histogram",
-    ]),
+    ], 128, "poisson", 1000, 100000, "&xi;=0.05&sdot;&theta;<sup>-0.8</sup>", 3, "1"),
     d5: new DatasetMetadata("d5", "Dataset 5", "Replace with description of page", [
       "d5-2-pt-corr",
       "d5-amplitude-blobs-cdf",
@@ -79,8 +91,16 @@ const usePlotStore = create((set, get) => ({
       "d5-stack",
       "d5-total-flux-cdf",
       "d5-total-flux-histogram",
-    ]),
-    d6: new DatasetMetadata("d6", "Dataset 6", "Replace with description of page", []),
+    ], 32, "poisson", 10, 50000, "None", 3, "(1,10]"),
+    d6: new DatasetMetadata("d6", "Dataset 6", "Replace with description of page", [
+      'd6-gen-imgs',
+      'd6-max-flux',
+      'd6-min-flux',
+      'd6-power-spec',
+      'd6-stack-histogram-img',
+      'd6-stack',
+      'd6-total-flux-distr',
+    ], 128, "poisson", 1000, 100000, "&xi;=0.05&sdot;&theta;<sup>-0.8</sup>", 3, "(1,10]"),
     e: new DatasetMetadata('e', 'Exactly 10', "Replace with description of page", [
       'e-number-blobs-histogram',
       'e-max-peak',
@@ -104,7 +124,7 @@ const usePlotStore = create((set, get) => ({
   imagePaths: {
     'd1-2-pt-corr': "/plots/diffusion/dataset_1/2-pt-corr.png",
     'd1-gen-imgs': "/plots/diffusion/dataset_1/gen-imgs.png",
-    'd1-max-peak': "/plots/diffusion/dataset_1/max-peak.png", 
+    'd1-max-peak': "/plots/diffusion/dataset_1/max-peak.png",
     'd1-min-peak': "/plots/diffusion/dataset_1/min-peak.png",
     'd1-number-blobs-histogram': "/plots/diffusion/dataset_1/number-blobs-histogram.png",
     'd1-power-spec': "/plots/diffusion/dataset_1/power-spec.png",
@@ -151,6 +171,13 @@ const usePlotStore = create((set, get) => ({
     'd5-stack': "/plots/diffusion/dataset_5/stack.png",
     'd5-total-flux-cdf': "/plots/diffusion/dataset_5/total-flux-cdf.png",
     'd5-total-flux-histogram': "/plots/diffusion/dataset_5/total-flux-histogram.png",
+    'd6-gen-imgs': "/plots/diffusion/dataset_6/gen-imgs.png",
+    'd6-max-flux': "/plots/diffusion/dataset_6/max-flux.png",
+    'd6-min-flux': "/plots/diffusion/dataset_6/min-flux.png",
+    'd6-power-spec': "/plots/diffusion/dataset_6/power-spec.png",
+    'd6-stack-histogram-img': "/plots/diffusion/dataset_6/stack-histogram-img.png",
+    'd6-stack': "/plots/diffusion/dataset_6/stack.png",
+    'd6-total-flux-distr': "/plots/diffusion/dataset_6/total-flux-distr.png",
     'e-number-blobs-histogram': "/plots/comparison/exactly_10/number-blobs-histogram.png",
     'e-max-peak': "/plots/comparison/exactly_10/max-peak.png",
     'e-min-peak': "/plots/comparison/exactly_10/min-peak.png",
@@ -178,13 +205,14 @@ const usePlotStore = create((set, get) => ({
     "stack-histogram-img.png": new ImageMetadata("Histogram of stacked images", "Replace with description of page"),
     "stack.png": new ImageMetadata("Stacked images", "Replace with description of page"),
     "total-flux-cdf.png": new ImageMetadata("CDF of total flux", "Replace with description of page"),
-    "total-flux-histogram.png": new ImageMetadata("Histogram of total flux","Replace with description of page"),
+    "total-flux-histogram.png": new ImageMetadata("Histogram of total flux", "Replace with description of page"),
     "max-flux.png": new ImageMetadata("Maximum flux", "Replace with description of page"),
     "min-flux.png": new ImageMetadata("Minimum flux", "Replace with description of page"),
-    "amplitude-blobs-cdf.png": new ImageMetadata("CDF of blobs amplitude","Replace with description of page"),
-    "amplitude-blobs-histogram.png": new ImageMetadata("Histogram of blobs amplitude","Replace with description of page"),
+    "amplitude-blobs-cdf.png": new ImageMetadata("CDF of blobs amplitude", "Replace with description of page"),
+    "amplitude-blobs-histogram.png": new ImageMetadata("Histogram of blobs amplitude", "Replace with description of page"),
     'residual.png': new ImageMetadata("Residuals", "Replace with description of page"),
     'samples.png': new ImageMetadata("Samples", "Replace with description of page"),
+    'total-flux-distr.png': new ImageMetadata("Distribution of total flux", "Replace with description of page"),
   },
 
   imageId2Metadata: (id) => {
