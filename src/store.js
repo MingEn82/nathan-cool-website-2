@@ -1,23 +1,13 @@
 import { create } from "zustand";
+import { ComparisonDescription, DatasetDescription } from "./components/Descriptions";
 
 class DatasetMetadata {
-  constructor(id, title, desc, imageIds, resolution, 
-    distribution, blobCount, sampleCount, 
-    blobClustering, blobSize, 
-    blobAmplitude, blobAmplitudeDesc = null
-  ) {
+  constructor(id, title, imageIds, desc, descProps={}) {
     this.id = id;
     this.title = title;
-    this.desc = desc;
     this.imageIds = imageIds;
-    this.resolution = resolution;
-    this.distribution = distribution;
-    this.blobCount = blobCount,
-    this.sampleCount = sampleCount;
-    this.blobClustering = blobClustering;
-    this.blobSize = blobSize;
-    this.blobAmplitude = blobAmplitude;
-    this.blobAmplitudeDesc = blobAmplitudeDesc;
+    this.desc = desc;
+    this.descProps = descProps;
   }
 }
 
@@ -33,7 +23,7 @@ const usePlotStore = create((set, get) => ({
   comparisonDatasetIds: ['e', 'p'],
 
   datasets: {
-    d1: new DatasetMetadata("d1", "Dataset 1", "Replace with description of page", [
+    d1: new DatasetMetadata("d1", "Dataset 1", [
       "d1-2-pt-corr",
       "d1-gen-imgs",
       "d1-max-peak",
@@ -44,8 +34,13 @@ const usePlotStore = create((set, get) => ({
       "d1-stack",
       "d1-total-flux-cdf",
       "d1-total-flux-histogram",
-    ], 32, "delta", 10, 50000, "None", 5, "0.1"),
-    d2: new DatasetMetadata("d2", "Dataset 2", "Replace with description of page", [
+    ], DatasetDescription, {
+      resolution: 32, sampleCount: 50000, blobCount: 10,
+      blobCountDistribution: "delta", blobClustering: "None",
+      blobSize: 5, blobAmplitude: "0.1"
+    }),
+
+    d2: new DatasetMetadata("d2", "Dataset 2", [
       "d2-2-pt-corr",
       "d2-gen-imgs",
       "d2-min-peak",
@@ -56,8 +51,13 @@ const usePlotStore = create((set, get) => ({
       "d2-stack",
       "d2-total-flux-cdf",
       "d2-total-flux-histogram",
-    ], 32, "poisson", 10, 50000, "None", 5, "0.1"),
-    d3: new DatasetMetadata("d3", "Dataset 3", "Replace with description of page", [
+    ], DatasetDescription, {
+      resolution: 32, sampleCount: 50000, blobCount: 10,
+      blobCountDistribution: "poisson", blobClustering: "None",
+      blobSize: 5, blobAmplitude: "0.1"
+    }),
+
+    d3: new DatasetMetadata("d3", "Dataset 3", [
       "d3-gen-imgs",
       "d3-max-flux",
       "d3-min-flux",
@@ -66,8 +66,13 @@ const usePlotStore = create((set, get) => ({
       "d3-stack",
       "d3-total-flux-cdf",
       "d3-total-flux-histogram",
-    ], 128, "poisson", 1000, 100000, "None", 3, "1"),
-    d4: new DatasetMetadata("d4", "Dataset 4", "Replace with description of page", [
+    ], DatasetDescription, {
+      resolution: 128, sampleCount: 100000, blobCount: 1000,
+      blobCountDistribution: "poisson", blobClustering: "None",
+      blobSize: 3, blobAmplitude: "1"
+    }),
+
+    d4: new DatasetMetadata("d4", "Dataset 4", [
       "d4-gen-imgs",
       "d4-max-flux",
       "d4-min-flux",
@@ -76,8 +81,13 @@ const usePlotStore = create((set, get) => ({
       "d4-stack",
       "d4-total-flux-cdf",
       "d4-total-flux-histogram",
-    ], 128, "poisson", 1000, 100000, "&xi;=0.05&sdot;&theta;<sup>-0.8</sup>", 3, "1"),
-    d5: new DatasetMetadata("d5", "Dataset 5", "Replace with description of page", [
+    ], DatasetDescription, {
+      resolution: 128, sampleCount: 100000, blobCount: 1000,
+      blobCountDistribution: "poisson", blobClustering: "&xi;=0.05&sdot;&theta;<sup>-0.8</sup>",
+      blobSize: 3, blobAmplitude: "1"
+    }),
+
+    d5: new DatasetMetadata("d5", "Dataset 5", [
       "d5-2-pt-corr",
       "d5-amplitude-blobs-cdf",
       "d5-amplitude-blobs-histogram",
@@ -91,8 +101,13 @@ const usePlotStore = create((set, get) => ({
       "d5-stack",
       "d5-total-flux-cdf",
       "d5-total-flux-histogram",
-    ], 32, "poisson", 10, 50000, "None", 3, "(1,10]"),
-    d6: new DatasetMetadata("d6", "Dataset 6", "Replace with description of page", [
+    ], DatasetDescription, {
+      resolution: 32, sampleCount: 50000, blobCount: 10,
+      blobCountDistribution: "poisson", blobClustering: "None",
+      blobSize: 3, blobAmplitude: "(1,10]", blobAmplitudeDesc: "Sampled from a power law"
+    }),
+
+    d6: new DatasetMetadata("d6", "Dataset 6", [
       'd6-gen-imgs',
       'd6-max-flux',
       'd6-min-flux',
@@ -100,8 +115,13 @@ const usePlotStore = create((set, get) => ({
       'd6-stack-histogram-img',
       'd6-stack',
       'd6-total-flux-distr',
-    ], 128, "poisson", 1000, 100000, "&xi;=0.05&sdot;&theta;<sup>-0.8</sup>", 3, "(1,10]"),
-    e: new DatasetMetadata('e', 'Exactly 10', "Replace with description of page", [
+    ], DatasetDescription, {
+      resolution: 128, sampleCount: 100000, blobCount: 1000,
+      blobCountDistribution: "poisson", blobClustering: "&xi;=0.05&sdot;&theta;<sup>-0.8</sup>",
+      blobSize: 3, blobAmplitude: "(1,10]", blobAmplitudeDesc: "Sampled from a power law"
+    }),
+
+    e: new DatasetMetadata('e', 'Exactly 10', [
       'e-number-blobs-histogram',
       'e-max-peak',
       'e-min-peak',
@@ -109,8 +129,9 @@ const usePlotStore = create((set, get) => ({
       'e-samples',
       'e-stack-histogram-img',
       'e-stack',
-    ]),
-    p: new DatasetMetadata('p', 'Poisson 10', "Replace with description of page", [
+    ], ComparisonDescription),
+
+    p: new DatasetMetadata('p', 'Poisson 10', [
       'p-number-blobs-histogram',
       'p-max-peak',
       'p-min-peak',
@@ -118,7 +139,7 @@ const usePlotStore = create((set, get) => ({
       'p-samples',
       'p-stack-histogram-img',
       'p-stack',
-    ]),
+    ], ComparisonDescription),
   },
 
   imagePaths: {
