@@ -2,6 +2,8 @@ import { useEffect, useRef } from 'react';
 import {
   Chart,
   LineController,
+  BarController,
+  BarElement,
   LineElement,
   PointElement,
   LinearScale,
@@ -13,6 +15,8 @@ import annotationPlugin from 'chartjs-plugin-annotation';
 Chart.register(
   LineController,
   LineElement,
+  BarController,
+  BarElement,
   PointElement,
   LinearScale,
   Title,
@@ -24,15 +28,15 @@ const factorial = (n) => {
   const results = [1];
   if (n == 0 || n == 1) { return results[0]; }
   for (let i = 1; i < n; i++) {
-    results.push(results[i-1] * (i+1));
+    results.push(results[i - 1] * (i + 1));
   }
-  return results[n-1];
+  return results[n - 1];
 }
 
 const poissonDistributionApprox = (lambda) => {
   // Normal Distribution N(λ,λ) is used to approximate Poisson Distribution when λ is too large
-  const minX = Math.round(lambda*0.9);
-  const maxX = Math.round(lambda*1.3);
+  const minX = Math.round(lambda * 0.9);
+  const maxX = Math.round(lambda * 1.3);
   const X = [];
   const Y = [];
   for (let x = minX; x <= maxX; x++) {
@@ -44,7 +48,7 @@ const poissonDistributionApprox = (lambda) => {
 }
 
 const poissonDistribution = (lambda) => {
-  const minX = lambda - 10;
+  const minX = Math.max(0, lambda - 10);
   const maxX = lambda + 30;
   const X = [];
   const Y = [];
@@ -54,6 +58,57 @@ const poissonDistribution = (lambda) => {
     Y.push(prob);
   }
   return { X, Y }
+}
+
+const DeltaChart = ({ lambda }) => {
+  const canvasRef = useRef(null);
+  const chartRef = useRef(null);
+
+  useEffect(() => {
+    const minX = Math.max(0, lambda - 10);
+    const maxX = lambda + 10;
+    const X = [];
+    const Y = [];
+    for (let x = minX; x <= maxX; x++) {
+      const y = x === lambda ? x : 0;
+      X.push(x);
+      Y.push(y);
+    }
+
+    console.log(X);
+    console.log(Y);
+
+    const ctx = canvasRef.current.getContext('2d');
+
+    // Destroy any existing chart instance before creating a new one
+    if (chartRef.current) {
+      chartRef.current.destroy();
+    }
+
+    chartRef.current = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: X,
+        datasets: [
+          {
+            label: `Kronecker Distribution (λ = ${lambda})`,
+            data: Y,
+            backgroundColor: 'rgba(54, 162, 235, 0.4)',
+            borderColor: 'rgb(54, 162, 235)',
+          }
+        ]
+      }
+    })
+
+    // Clean up chart on component unmount
+    return () => {
+      if (chartRef.current) {
+        chartRef.current.destroy();
+      }
+    };
+  }, [lambda]);
+
+  return <canvas ref={canvasRef} className="h-full" />;
 }
 
 const PoissonChart = ({ lambda }) => {
@@ -76,15 +131,15 @@ const PoissonChart = ({ lambda }) => {
     }
 
     chartRef.current = new Chart(ctx, {
-      type: 'line',
+      type: 'bar',
       data: {
         labels: X,
         datasets: [
           {
             label: `Poisson Distribution (λ = ${lambda})`,
             data: Y,
-            borderColor: 'blue',
-            fill: false,
+            backgroundColor: 'rgba(54, 162, 235, 0.4)',
+            borderColor: 'rgb(54, 162, 235)',
           },
         ],
       },
@@ -129,4 +184,4 @@ const PoissonChart = ({ lambda }) => {
   return <canvas ref={canvasRef} className="h-full" />;
 };
 
-export default PoissonChart;
+export { PoissonChart, DeltaChart };

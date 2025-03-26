@@ -1,4 +1,4 @@
-import PoissonChart from "./Charts"
+import { PoissonChart, DeltaChart } from "./Charts"
 
 export const ComparisonDescription = () => {
   return <div className="w-full text-center text-lg md:text-3xl lg:text-5xl py-6 md:py-10">
@@ -25,7 +25,7 @@ const ChartComponent = ({ distribution, lambda }) => {
     text-center text-2xl
   ">
     <p className="capitalize">{distribution} Distribution, Mean = {lambda}</p>
-    <PoissonChart lambda={lambda} />
+    { distribution === 'delta' ? <DeltaChart lambda={lambda} /> : <PoissonChart lambda={lambda} /> }
   </div>
 }
 
