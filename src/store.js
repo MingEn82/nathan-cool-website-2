@@ -235,7 +235,7 @@ const usePlotStore = create((set, get) => ({
     'samples.png': new ImageMetadata("Samples", "Replace with description of page"),
     'total-flux-distr.png': new ImageMetadata("Distribution of total flux", "Replace with description of page"),
   },
-
+  
   imageId2Metadata: (id) => {
     const imagePath = get().imagePaths[id];
     // The metadata is inferred from the image name
