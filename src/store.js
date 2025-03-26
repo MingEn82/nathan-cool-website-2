@@ -257,7 +257,6 @@ const usePlotStore = create((set, get) => ({
     }
     return modelType;
   },
-
   isSidebarOpen: false,
   toggleSidebar: () => set((s) => ({ isSidebarOpen: !s.isSidebarOpen })),
   closeSidebar: () => set({ isSidebarOpen: false }),

@@ -5,7 +5,7 @@ const Plotbar = () => {
 
     return <div className="bg-rangoon-green w-screen h-14 px-4 flex justify-between items-center">
         <svg 
-            className="h-1/2 stroke-white stroke-[1.5]" 
+            className="h-1/2 stroke-white stroke-[1.5] cursor-pointer" 
             fill="#ffffff" 
             viewBox="0 0 1024 1024" 
             xmlns="http://www.w3.org/2000/svg"

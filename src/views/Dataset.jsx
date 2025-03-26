@@ -1,7 +1,9 @@
 import { useParams } from "react-router"
-import usePlotStore from "../store";
+import { useState, useEffect } from "react";
 import Taskbar from "../components/Taskbar";
 import ImageCard from "../components/ImageCard";
+import { DatasetMetadata, fetchDatasetById, fetchDatasetPlots, fetchPlotUrl } from "../api";
+import { ColorRing } from "react-loader-spinner";
 
 const Dataset = () => {
     const { datasetId } = useParams();
@@ -24,6 +26,12 @@ const Dataset = () => {
                 return <ImageCard src={imagePath} title={metadata.title} link={`/plot/${id}`} key={id} />
             })}
         </div>
+        {!isLoading && <div className="px-4 md:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {plots.map(plot => {
+                let imageSrc = fetchPlotUrl(plot.path);
+                return <ImageCard src={imageSrc} title={plot.title} link={`/plot/${plot.id}`} key={plot.id} />
+            })}
+        </div>}
     </div>
 }
 
