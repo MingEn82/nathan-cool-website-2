@@ -36,7 +36,7 @@ const CardComponent = ({ title, body, tooltip }) => {
     text-center p-4 group relative
   ">
     <p className="text-lg underline">{title}</p>
-    <p className="text-2xl">{body}</p>
+    <p className="text-2xl" dangerouslySetInnerHTML={{ __html: body }} />
     {tooltip && <div
       className="
         absolute mt-3 px-2 py-1
