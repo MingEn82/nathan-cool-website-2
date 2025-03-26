@@ -8,11 +8,11 @@ export const ComparisonDescription = () => {
 
 const ResolutionComponent = ({ resolution }) => {
   return <div className="
-    w-1/6 flex flex-col gap-2 
-    text-center md:text-lg lg:text-2xl
-  ">
+    col-span-1 flex flex-col gap-2 
+    text-center text-2xl items-center
+">
     <p className="">Resolution</p>
-    <div className="w-full aspect-square border-2 border-black relative bg-orange-100">
+    <div className="h-40 w-40 md:w-full md:h-auto md:aspect-square border-2 border-black relative bg-orange-100">
       <p className="absolute left-1 top-1/2 -translate-y-1/2">{resolution}</p>
       <p className="absolute bottom-1 left-1/2 -translate-x-1/2">{resolution}</p>
     </div>
@@ -21,21 +21,55 @@ const ResolutionComponent = ({ resolution }) => {
 
 const ChartComponent = ({ distribution, lambda }) => {
   return <div className="
-    w-1/2 flex flex-col gap-2
-    text-center md:text-lg lg:text-2xl
+    col-span-3 lg:col-span-2 flex flex-col gap-2
+    text-center text-2xl
   ">
     <p className="capitalize">{distribution} Distribution, Mean = {lambda}</p>
     <PoissonChart lambda={lambda} />
   </div>
 }
 
-export const DatasetDescription = ({ 
-  resolution, sampleCount, blobCount, 
-  blobCountDistribution, blobClustering, 
+const CardComponent = ({ title, body, tooltip }) => {
+  return <div className="
+    bg-orange-100 rounded-xl
+    border-2 border-black
+    text-center p-4 group relative
+  ">
+    <p className="text-lg underline">{title}</p>
+    <p className="text-2xl">{body}</p>
+    {tooltip && <div
+      className="
+        absolute mt-3 px-2 py-1
+        text-sm text-white bg-black 
+        rounded opacity-0 
+        group-hover:opacity-100 
+        transition-opacity 
+        pointer-events-none
+        whitespace-nowrap
+        z-100
+    ">
+      {tooltip}
+      <div className="absolute bottom-full left-1/2 lg:left-3/4 transform -translate-x-1/2 border-[5px] border-transparent border-b-black" />
+    </div>}
+  </div>
+}
+
+export const DatasetDescription = ({
+  resolution, sampleCount, blobCount,
+  blobCountDistribution, blobClustering,
   blobSize, blobAmplitude, blobAmplitudeDesc
 }) => {
-  return <div className="w-full my-6 md:my-10 px-4 md:px-6 lg:px-8 flex gap-5">
+  return <div className="
+    w-full my-6 md:my-10 px-4 md:px-6 lg:px-8 
+    grid grid-cols-4 gap-5"
+  >
     <ResolutionComponent resolution={resolution} />
     <ChartComponent distribution={blobCountDistribution} lambda={blobCount} />
+    <div className="col-span-4 lg:col-span-1 grid grid-cols-4 lg:grid-cols-1 grid-flow-rows h-full gap-2">
+      <CardComponent title="Sample Count" body={sampleCount} />
+      <CardComponent title="Blob Clustering" body={blobClustering} />
+      <CardComponent title="Blob Size" body={blobSize} />
+      <CardComponent title="Blob Amplitude" body={blobAmplitude} tooltip={blobAmplitudeDesc} />
+    </div>
   </div>
 }
