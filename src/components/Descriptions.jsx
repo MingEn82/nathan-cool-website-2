@@ -8,7 +8,7 @@ export const ComparisonDescription = () => {
 
 const ResolutionComponent = ({ resolution }) => {
   return <div className="
-    col-span-1 flex flex-col gap-2 
+    col-span-4 md:col-span-1 flex flex-col gap-2 
     text-center text-2xl items-center
 ">
     <p className="">Resolution</p>
@@ -21,7 +21,7 @@ const ResolutionComponent = ({ resolution }) => {
 
 const ChartComponent = ({ distribution, lambda }) => {
   return <div className="
-    col-span-3 lg:col-span-2 flex flex-col gap-2
+    col-span-4 md:col-span-3 lg:col-span-2 flex flex-col gap-2
     text-center text-2xl
   ">
     <p className="capitalize">{distribution} Distribution, Mean = {lambda}</p>
@@ -35,8 +35,8 @@ const CardComponent = ({ title, body, tooltip }) => {
     border-2 border-black
     text-center p-4 group relative
   ">
-    <p className="text-lg underline">{title}</p>
-    <p className="text-2xl" dangerouslySetInnerHTML={{ __html: body }} />
+    <p className="text-base md:text-lg underline">{title}</p>
+    <p className="text-lg md:text-2xl" dangerouslySetInnerHTML={{ __html: body }} />
     {tooltip && <div
       className="
         absolute mt-3 px-2 py-1
@@ -60,12 +60,12 @@ export const DatasetDescription = ({
   blobSize, blobAmplitude, blobAmplitudeDesc
 }) => {
   return <div className="
-    w-full my-6 md:my-10 px-4 md:px-6 lg:px-8 
+    w-full my-6 md:my-10 px-9 md:px-6 lg:px-8 
     grid grid-cols-4 gap-5"
   >
     <ResolutionComponent resolution={resolution} />
     <ChartComponent distribution={blobCountDistribution} lambda={blobCount} />
-    <div className="col-span-4 lg:col-span-1 grid grid-cols-4 lg:grid-cols-1 grid-flow-rows h-full gap-2">
+    <div className="col-span-4 lg:col-span-1 grid grid-cols-2 lg:grid-cols-1 grid-flow-rows h-full gap-2">
       <CardComponent title="Sample Count" body={sampleCount} />
       <CardComponent title="Blob Clustering" body={blobClustering} />
       <CardComponent title="Blob Size" body={blobSize} />
